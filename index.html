@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fashion Store</title>
+<style>
+  body { font-family: Arial, sans-serif; background: lightgray; }
+  .header { background: black; color: white; text-align: center; padding: 1em; position: relative; }
+  .cart { position: absolute; top: 10px; right: 10px; padding: 1em; color: white; }
+  .container { display: flex; flex-wrap: wrap; justify-content: space-around; padding: 1em; }
+  .product { background: white; padding: 10px; margin: 10px; width: calc(33.333% - 20px); box-shadow: 0 0 10px #ccc; text-align: center; }
+  .product img { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Fashion Store</h1>
+  <div class="cart">Cart: <span id="cart-total">0</span></div>
+</div>
+<div class="container">
+  <!-- Products will be injected here -->
+</div>
+<script>
+// Product Data
+const products = [
+  { id: 1, name: "Shirt", price: 25, image: "img1.png" },
+  { id: 2, name: "Pants", price: 40, image: "img2.png" },
+  { id: 3, name: "Shoes", price: 60, image: "img3.png" },
+  { id: 4, name: "Dress", price: 80, image: "img4.png" },
+  { id: 5, name: "Hat", price: 15, image: "img5.png" },
+  { id: 6, name: "Socks", price: 5, image: "img6.png" },
+  { id: 7, name: "Bag", price: 35, image: "img7.png" },
+  { id: 8, name: "Scarf", price: 20, image: "img8.png" },
+  { id: 9, name: "Sunglasses", price: 50, image: "img9.png" },
+  { id: 10, name: "Watch", price: 75, image: "img10.png" }
+];
+
+// Function to display products
+function displayProducts() {
+  const container = document.querySelector('.container');
+  products.forEach(product => {
+    container.innerHTML += `
+      <div class="product">
+        <img src="${product.image}" alt="${product.name}" />
+        <h3>${product.name}</h3>
+        <p>$${product.price}</p>
+        <button onclick="addToCart(${product.price})">Add to Cart</button>
+      </div>
+    `;
+  });
+}
+
+let cartTotal = 0;
+
+function addToCart(price) {
+  cartTotal += price;
+  document.getElementById('cart-total').innerHTML = cartTotal.toFixed(2);
+}
+
+// Initialize the product display
+displayProducts();
+</script>
+</body>
+</html>
